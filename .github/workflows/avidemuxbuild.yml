@@ -31,6 +31,7 @@ jobs:
       # https://docs.openspaceproject.com/releases-v0.20/contribute/development/compiling/ubuntu.html
       run: |
        # brew install cmake glew boost freeimage mpv vulkan-headers vulkan-loader brotli gdal qt@6
+       brew install cmake pkg-config nasm yasm qt xvid x264 x265 libvpx aom opus fdk-aac lame libass mp4v2 a52dec
 
     
     - name: Configure CMake
@@ -46,12 +47,13 @@ jobs:
     - name: Build
       # Build your program with the given configuration
       run: |
-        #openSpaceHome="$HOME/source/OpenSpace"
-        #cd "$openSpaceHome/build"
+        openSpaceHome="$HOME/source/OpenSpace"
+        cd "$openSpaceHome"
         # Use the system's libvulkan, not the vendored one, otherwise they might conflict
         #cef_orig_dir=$(find $HOME/source/OpenSpace/build -path */Release/libcef.so | xargs dirname)
         #rm -v $cef_orig_dir/libvulkan.so.1
         #make -j $(nproc)
+        bash bootStrapMacOS_Monterey.arm64.sh
         
     
     - name: Upload Artifact
